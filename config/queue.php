@@ -85,6 +85,11 @@ return [
                     'vhost'    => env('RABBITMQ_VHOST', '/'),
                 ],
             ],
+            'options' => [
+                'queue' => [
+                    'declare' => true,
+                ],
+            ],
         ],
 
         'deferred' => [

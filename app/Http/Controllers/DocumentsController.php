@@ -50,16 +50,15 @@ class DocumentsController extends Controller
 
     public function destroy(Document $document):JsonResponse
     {
-        DocumentDeleted::dispatch(
-            $document->original_name,
-            $document->mime_type,
-            $document->size,
-            'manual',
-            now()->toISOString(),
-        );
+        $name      = $document->original_name;
+        $mimeType  = $document->mime_type;
+        $size      = $document->size;
+        $deletedAt = now()->toISOString();
 
         $document->deleteFile();
         $document->delete();
+
+        DocumentDeleted::dispatch($name, $mimeType, $size, 'manual', $deletedAt);
 
         return response()->json(['message' => 'File deleted successfully']);
     }

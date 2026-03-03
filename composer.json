@@ -10,7 +10,7 @@
         "laravel/framework": "^12.0",
         "laravel/octane": "^2.14",
         "laravel/tinker": "^2.10.1",
-        "vladimir-yuldashev/laravel-queue-rabbitmq": "^13.0"
+        "vladimir-yuldashev/laravel-queue-rabbitmq": "^14.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^3.6",

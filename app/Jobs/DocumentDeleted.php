@@ -12,15 +12,15 @@ class DocumentDeleted implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable;
 
-    public string $connection = 'rabbitmq';
-
     public function __construct(
         public readonly string $name,
         public readonly string $mimeType,
         public readonly int    $size,
         public readonly string $source, // 'manual' | 'expired'
         public readonly string $deletedAt,
-    ) {}
+    ) {
+        $this->onConnection('rabbitmq');
+    }
 
     public function handle(): void
     {

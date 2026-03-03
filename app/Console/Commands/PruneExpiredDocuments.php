@@ -23,16 +23,15 @@ class PruneExpiredDocuments extends Command
         $count = 0;
 
         foreach ($expired as $document) {
-            DocumentDeleted::dispatch(
-                $document->original_name,
-                $document->mime_type,
-                $document->size,
-                'expired',
-                now()->toISOString(),
-            );
+            $name      = $document->original_name;
+            $mimeType  = $document->mime_type;
+            $size      = $document->size;
+            $deletedAt = now()->toISOString();
 
             $document->deleteFile();
             $document->delete();
+
+            DocumentDeleted::dispatch($name, $mimeType, $size, 'expired', $deletedAt);
             $count++;
         }
 
